@@ -30,7 +30,6 @@ rect_scale = Vector2( 2.39765, 2.39765 )
 text = "10"
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
-visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -40.0
@@ -43,7 +42,6 @@ normal = ExtResource( 3 )
 action = "ui_up"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
