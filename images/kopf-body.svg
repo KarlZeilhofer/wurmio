@@ -41,6 +41,17 @@
        fy="134.23787"
        r="12.571576"
        gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient842"
+       id="radialGradient923"
+       gradientUnits="userSpaceOnUse"
+       cx="59.875595"
+       cy="134.23787"
+       fx="59.875595"
+       fy="134.23787"
+       r="12.571576"
+       gradientTransform="translate(-26.152806,-10.209316)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -511,5 +522,14 @@ AElFTkSuQmCC
        transform="rotate(-21.324267)"
        inkscape:export-xdpi="64.650002"
        inkscape:export-ydpi="64.650002" />
+    <circle
+       inkscape:export-ydpi="64.650002"
+       inkscape:export-xdpi="64.650002"
+       transform="rotate(-21.324267)"
+       r="12.571576"
+       cy="124.02856"
+       cx="33.72279"
+       id="circle913"
+       style="opacity:1;fill:url(#radialGradient923);fill-opacity:1;stroke:none;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
   </g>
 </svg>

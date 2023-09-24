@@ -1,15 +1,22 @@
 extends Node2D
 
-var wuermer:Array
+export(PackedScene) var futter_scene:PackedScene
+
+var groesse = 10
 
 func _ready():
-	$WachstumsTimer.connect("timeout", self, "_on_WachstumsTimer_timeout")
+	$FutterTimer.connect("timeout", self, "_on_FutterTimer_timeout")
+	
+	for i in 1000:
+		neues_futter()
 
+func neues_futter():
+	var futter = futter_scene.instance()
+	futter.position = Vector2(randi()%8192 - 4096, randi()%8192 - 4096)
+	add_child(futter)
 
-func _on_WachstumsTimer_timeout():
-	# hier muss der wurm noch wachsen. 
-	print("Wurmio wachse!")
-	$Wurm.wachsen()
+func _on_FutterTimer_timeout():
+	neues_futter()
 
 func _process(delta):
 	

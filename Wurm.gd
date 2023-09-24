@@ -4,20 +4,22 @@ export(PackedScene) var body_scene:PackedScene
 
 export var schnelligkeit1:float = 300 # pixel pro Sekunde
 export var schnelligkeit2:float = 600 # pixe pro Sekunde
+export var winkelgeschwindigkeit:float = 0.8*PI # Radiant pro Sekunde
+
 var schnelligkeit:float = 0
 onready var kopf = $Kopf
-var winkelgeschwindigkeit:float = 0.8*PI # Radiant pro Sekunde
 
 
 var screen_size:Vector2
 var bodies:Array
+var laenge = 10
 
 func _init():
 	print("Hello World")
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	for i in 20:
+	for i in 5:
 		wachsen()
 
 func _process(delta):
@@ -29,13 +31,16 @@ func _process(delta):
 		kopf.rotation += winkelgeschwindigkeit*delta
 	if Input.is_action_pressed("ui_select") or Input.is_action_pressed("ui_up"):
 		schnelligkeit = schnelligkeit2
+		modulate = Color(2,2,2)
 	else:
 		schnelligkeit = schnelligkeit1
+		modulate = Color(1.2,1.2,1.2)
 		
 	var geschwindigkeit:Vector2 = Vector2.UP.rotated(kopf.rotation) * schnelligkeit
 	kopf.position += geschwindigkeit * delta
 #	kopf.position.x = clamp(kopf.position.x, 0, screen_size.x)
 #	kopf.position.y = clamp(kopf.position.y, 0, screen_size.y)
+	#$Kopf/Camera2D.offset = kopf.position
 	
 	bewegen(delta)
 	
@@ -94,3 +99,19 @@ func wachsen():
 	bodies.append(body)
 	add_child(body)
 
+
+
+func _on_Kopf_area_entered(area):
+	
+	# dies ist eine valide annahme
+	# wegen der collision layer (2) und collision mask (2)
+	var futter = area 
+	print(futter.menge)
+	var tmp = laenge
+	laenge = laenge + futter.menge/5
+	
+	if int(laenge/10) > int(tmp)/10 :
+		wachsen()
+	
+	futter.queue_free()
+	pass # Replace with function body.

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Wurm.gd" type="Script" id=1]
 [ext_resource path="res://images/kopf.png" type="Texture" id=2]
-[ext_resource path="res://Body2.tscn" type="PackedScene" id=3]
+[ext_resource path="res://WurmBody.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 27.1662
@@ -10,9 +10,15 @@ radius = 27.1662
 [node name="Wurm" type="Node2D"]
 script = ExtResource( 1 )
 body_scene = ExtResource( 3 )
+schnelligkeit1 = 150.0
+schnelligkeit2 = 400.0
+winkelgeschwindigkeit = 4.0
 
 [node name="Kopf" type="Area2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
 z_index = 1001
+collision_layer = 2
+collision_mask = 2
 __meta__ = {
 "_edit_group_": true
 }
@@ -22,3 +28,10 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kopf"]
 shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="Kopf"]
+current = true
+smoothing_enabled = true
+smoothing_speed = 2.0
+
+[connection signal="area_entered" from="Kopf" to="." method="_on_Kopf_area_entered"]
