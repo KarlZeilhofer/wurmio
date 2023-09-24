@@ -16,7 +16,7 @@ var laenge = 300
 var dicke:float = 1
 
 func _init():
-	print("Hello World")
+	print("Wurmio V23.0.0")
 
 func _ready():
 	screen_size = get_viewport_rect().size

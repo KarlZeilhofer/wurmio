@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="Wurmio"
+config/description="Der Slither.io Clone für das lokale Netzwerk!"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
@@ -27,6 +28,10 @@ window/size/fullscreen=true
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [physics]
 

@@ -5,13 +5,13 @@
 [ext_resource path="res://WurmBody.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 27.1662
+radius = 13.0
 
 [node name="Wurm" type="Node2D"]
 script = ExtResource( 1 )
 body_scene = ExtResource( 3 )
 schnelligkeit1 = 150.0
-schnelligkeit2 = 400.0
+schnelligkeit2 = 300.0
 winkelgeschwindigkeit = 4.0
 
 [node name="Kopf" type="Area2D" parent="."]
