@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Wurm.gd" type="Script" id=1]
+[ext_resource path="res://images/kopf.png" type="Texture" id=2]
+[ext_resource path="res://Body2.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 27.1662
+
+[node name="Wurm" type="Node2D"]
+script = ExtResource( 1 )
+body_scene = ExtResource( 3 )
+
+[node name="Kopf" type="Area2D" parent="."]
+z_index = 1001
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Kopf"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kopf"]
+shape = SubResource( 1 )
