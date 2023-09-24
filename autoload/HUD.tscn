@@ -1,6 +1,6 @@
 [gd_scene format=2]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer"]
 layer = 2
 
 [node name="Label" type="Label" parent="."]
@@ -11,4 +11,14 @@ margin_top = -34.9999
 margin_right = 93.0
 margin_bottom = -11.9999
 rect_scale = Vector2( 1.79608, 1.79608 )
-text = "Your Length"
+text = "Deine Länge: "
+
+[node name="laenge" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 185.0
+margin_top = -41.9999
+margin_right = 225.0
+margin_bottom = -27.9999
+rect_scale = Vector2( 2.39765, 2.39765 )
+text = "10"

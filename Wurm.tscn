@@ -15,7 +15,6 @@ schnelligkeit2 = 400.0
 winkelgeschwindigkeit = 4.0
 
 [node name="Kopf" type="Area2D" parent="."]
-scale = Vector2( 0.5, 0.5 )
 z_index = 1001
 collision_layer = 2
 collision_mask = 2
@@ -24,6 +23,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Kopf"]
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Kopf"]

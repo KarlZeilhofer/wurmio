@@ -22,3 +22,5 @@ func _process(delta):
 	
 	if Input.is_action_pressed("ui_cancel"):
 		get_tree().quit()
+	
+	$"/root/HUD/laenge".text = String($Wurm.laenge)

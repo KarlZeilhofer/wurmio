@@ -12,23 +12,24 @@ onready var kopf = $Kopf
 
 var screen_size:Vector2
 var bodies:Array
-var laenge = 10
+var laenge = 300
+var dicke:float = 1
 
 func _init():
 	print("Hello World")
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	for i in 5:
+	for i in laenge/10:
 		wachsen()
 
 func _process(delta):
 	if Input.is_action_pressed("ui_left"):
 		# Move as long as the key/button is pressed.
-		kopf.rotation -= winkelgeschwindigkeit*delta
+		kopf.rotation -= winkelgeschwindigkeit*delta/dicke
 	if Input.is_action_pressed("ui_right"):
 		# Move as long as the key/button is pressed.
-		kopf.rotation += winkelgeschwindigkeit*delta
+		kopf.rotation += winkelgeschwindigkeit*delta/dicke
 	if Input.is_action_pressed("ui_select") or Input.is_action_pressed("ui_up"):
 		schnelligkeit = schnelligkeit2
 		modulate = Color(2,2,2)
@@ -53,7 +54,7 @@ func bewegen(delta):
 	if bodies.empty():
 		return
 		
-	var segmentlaenge = 16
+	var segmentlaenge = 8*dicke
 	# Vektor von body_0 nach Kopf:
 	var r:Vector2
 	
@@ -98,7 +99,11 @@ func wachsen():
 	
 	bodies.append(body)
 	add_child(body)
-
+	
+	for b in bodies:
+		dicke = sqrt(sqrt(sqrt(laenge/30)))
+		b.scale = Vector2(dicke,dicke)
+	$Kopf.scale = Vector2(dicke,dicke)
 
 
 func _on_Kopf_area_entered(area):
@@ -110,7 +115,7 @@ func _on_Kopf_area_entered(area):
 	var tmp = laenge
 	laenge = laenge + futter.menge/5
 	
-	if int(laenge/10) > int(tmp)/10 :
+	if int(laenge/5) > int(tmp)/5 :
 		wachsen()
 	
 	futter.queue_free()
