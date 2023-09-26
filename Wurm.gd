@@ -1,10 +1,14 @@
 extends Node2D
 
+signal geschrumpft(schwanzposition)
+
+
 export(PackedScene) var body_scene:PackedScene
 
 export var schnelligkeit1:float = 300 # pixel pro Sekunde
 export var schnelligkeit2:float = 600 # pixe pro Sekunde
 export var winkelgeschwindigkeit:float = 0.8*PI # Radiant pro Sekunde
+
 
 var schnelligkeit:float = 0
 onready var kopf = $Kopf
@@ -12,7 +16,7 @@ onready var kopf = $Kopf
 
 var screen_size:Vector2
 var bodies:Array
-var laenge = 300
+var laenge = 30
 var dicke:float = 1
 
 func _init():
@@ -20,6 +24,7 @@ func _init():
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	
 	for i in laenge/10:
 		wachsen()
 
@@ -33,19 +38,29 @@ func _process(delta):
 	if Input.is_action_pressed("ui_select") or Input.is_action_pressed("ui_up"):
 		schnelligkeit = schnelligkeit2
 		modulate = Color(2,2,2)
+		laenge = laenge - 10*delta # Schrumpfen beim schnell fahren
+		laenge = clamp(laenge, 30, 1e9)
+		if laengeZuBodies(laenge) < bodies.size() :
+			schrumpfen()
+		if laenge <= 30:
+			schnelligkeit = schnelligkeit1
+			modulate = Color(1.2,1.2,1.2)
+	
 	else:
 		schnelligkeit = schnelligkeit1
 		modulate = Color(1.2,1.2,1.2)
 		
 	var geschwindigkeit:Vector2 = Vector2.UP.rotated(kopf.rotation) * schnelligkeit
 	kopf.position += geschwindigkeit * delta
+	if kopf.position.length() > 3900:
+		kopf.position = kopf.position.normalized()*3900
 #	kopf.position.x = clamp(kopf.position.x, 0, screen_size.x)
 #	kopf.position.y = clamp(kopf.position.y, 0, screen_size.y)
 	#$Kopf/Camera2D.offset = kopf.position
 	
 	bewegen(delta)
 	
-	#print(String(1/delta) + " fps, " + String(bodies.size()) + " bodies")
+	print(String(1/delta) + " fps, " + String(bodies.size()) + " bodies")
 
 
 func bewegen(delta):
@@ -54,7 +69,7 @@ func bewegen(delta):
 	if bodies.empty():
 		return
 		
-	var segmentlaenge = 8*dicke
+	var segmentlaenge = 10*dicke
 	# Vektor von body_0 nach Kopf:
 	var r:Vector2
 	
@@ -100,10 +115,19 @@ func wachsen():
 	bodies.append(body)
 	add_child(body)
 	
+	dicke = sqrt(sqrt(sqrt(laenge/30)))
 	for b in bodies:
-		dicke = sqrt(sqrt(sqrt(laenge/30)))
 		b.scale = Vector2(dicke,dicke)
 	$Kopf.scale = Vector2(dicke,dicke)
+
+func schrumpfen():
+	bodies.back().queue_free()
+	bodies.remove(bodies.size()-1)
+	emit_signal("geschrumpft", bodies.back().position)
+
+
+func laengeZuBodies(x):
+	return int(x/10)
 
 
 func _on_Kopf_area_entered(area):
@@ -111,11 +135,10 @@ func _on_Kopf_area_entered(area):
 	# dies ist eine valide annahme
 	# wegen der collision layer (2) und collision mask (2)
 	var futter = area 
-	print(futter.menge)
-	var tmp = laenge
+	#print(futter.menge)
 	laenge = laenge + futter.menge/5
 	
-	if int(laenge/5) > int(tmp)/5 :
+	if laengeZuBodies(laenge) > bodies.size():
 		wachsen()
 	
 	futter.queue_free()

@@ -3,11 +3,9 @@
 [ext_resource path="res://images/body.png" type="Texture" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 29.0
+radius = 15.0
 
 [node name="Area2D" type="Area2D"]
-modulate = Color( 0.216064, 0.368322, 0.691406, 1 )
-self_modulate = Color( 0.980469, 0.321746, 0.271927, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
