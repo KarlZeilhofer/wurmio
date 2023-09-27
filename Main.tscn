@@ -13,19 +13,20 @@ glow_enabled = true
 [node name="GameController" type="Node2D"]
 script = ExtResource( 1 )
 futter_scene = ExtResource( 4 )
+wurm_scene = ExtResource( 3 )
 
 [node name="Background" type="TextureRect" parent="."]
-margin_left = -4096.0
-margin_top = -4096.0
-margin_right = 4096.0
-margin_bottom = 4096.0
+margin_left = -40960.0
+margin_top = -40960.0
+margin_right = 40960.0
+margin_bottom = 40960.0
 texture = ExtResource( 2 )
 stretch_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Background"]
+[node name="Arena" type="TextureRect" parent="Background"]
 margin_right = 40.0
 margin_bottom = 40.0
-rect_scale = Vector2( 2, 2 )
+rect_scale = Vector2( 20, 20 )
 texture = ExtResource( 5 )
 
 [node name="FutterTimer" type="Timer" parent="."]
@@ -36,3 +37,4 @@ autostart = true
 environment = SubResource( 1 )
 
 [node name="Wurm" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.737255, 0.215686, 0.827451, 1 )
